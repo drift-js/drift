@@ -1,5 +1,17 @@
 # drift
 
+## 0.0.10
+
+### Patch Changes
+
+-   fix route type
+
+## 0.0.9
+
+### Patch Changes
+
+-   fix issue where routes are not being inferred properly
+
 ## 0.0.8
 
 ### Patch Changes

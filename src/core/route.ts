@@ -1,6 +1,7 @@
-import { DefaultContext, ContextWithMiddleware } from "./context";
-import { Middleware } from "./middleware";
+import { ContextWithMiddleware, DefaultContext } from "./context";
+
 import { DRIFT_ERROR } from "./error";
+import { Middleware } from "./middleware";
 import { UnionToIntersection } from "./utils";
 
 export type DriftRoute<
@@ -12,12 +13,9 @@ export type DriftRoute<
 > = {
     [key in TPath]: {
         [key in TMethod]: {
-            // @ts-ignore
-            input: ContextWithMiddleware<TContext, TMiddlewares>["body"];
-            // @ts-ignore
-            query: ContextWithMiddleware<TContext, TMiddlewares>["query"];
-            // @ts-ignore
-            params: ContextWithMiddleware<TContext, TMiddlewares>["params"];
+            input: ContextWithMiddleware<TContext, TMiddlewares> extends { body: infer TInput } ? TInput : any;
+            query: ContextWithMiddleware<TContext, TMiddlewares> extends { query: infer TQuery } ? TQuery : any;
+            params: ContextWithMiddleware<TContext, TMiddlewares> extends { params: infer TParams } ? TParams : any;
             output: UnionToIntersection<
                 TData extends {
                     [DRIFT_ERROR]: any;
@@ -31,8 +29,9 @@ export type DriftRoute<
                           200: TData;
                       }
             > &
-                // @ts-ignore
-                ContextWithMiddleware<TContext, TMiddlewares>["errors"];
+                ContextWithMiddleware<TContext, TMiddlewares> extends { errors: infer TErrors }
+                ? TErrors
+                : any;
         };
     };
 };

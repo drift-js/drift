@@ -1,4 +1,4 @@
-import { DriftRoute } from "src/core/route";
+import { DriftRoute } from "./route";
 import { ContextWithPath } from "./context";
 import { Drift } from "./framework";
 import { Handler, HandlerWithMiddleware } from "./handler";

@@ -1,8 +1,9 @@
-import { Drift, ArkType } from "src";
+import { ArkType, Drift } from "src";
+
 import { type } from "arktype";
 
 const app = new Drift()
-    .get("/", () => {
+    .get("/users/:userId", () => {
         return { message: "Hello, World!" };
     })
     .post(
