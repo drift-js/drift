@@ -1,6 +1,6 @@
 {
-    "name": "drift",
-    "version": "1.0.0",
+    "name": "@drift-js/drift",
+    "version": "0.0.1",
     "description": "A simple framework for building web applications",
     "main": "./dist/index.mjs",
     "module": "./dist/index.mjs",
@@ -22,11 +22,17 @@
             "require": "./dist/arktype.cjs",
             "import": "./dist/arktype.mjs",
             "types": "./dist/arktype.d.ts"
+        },
+        "./middleware": {
+            "require": "./dist/middleware.cjs",
+            "import": "./dist/middleware.mjs",
+            "types": "./dist/middleware.d.ts"
         }
     },
     "keywords": [],
     "license": "ISC",
     "devDependencies": {
+        "@changesets/cli": "^2.27.8",
         "@types/bun": "^1.1.10",
         "arktype": "2.0.0-rc.13",
         "tsup": "^8.3.0",
