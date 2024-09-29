@@ -129,7 +129,7 @@ export class Drift<TContext = DefaultContext, TRoutes = {}> {
             index++;
             if (index < middlewares.length) {
                 const mw = middlewares[index];
-                return mw({ ...context, next, set });
+                return mw(Object.assign({}, context, { set, next }));
             }
 
             return handler(context);
