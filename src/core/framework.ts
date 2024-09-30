@@ -125,7 +125,7 @@ export class Drift<TContext = DefaultContext, TRoutes = {}> {
         const set = (key: string, value: any) => {
             context[key] = value;
         };
-        const next = async (): Promise<any> => {
+        const next: any = async (): Promise<any> => {
             index++;
             if (index < middlewares.length) {
                 const mw = middlewares[index];

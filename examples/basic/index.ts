@@ -2,11 +2,8 @@ import { Drift, error } from "src";
 import { type } from "arktype";
 import { body } from "src/validation/arktype";
 
-const app = new Drift()
-    .get("/users/:userId", () => {
-        if (Math.random() > 0.5) {
-            return error("Random", 501);
-        }
+export const app = new Drift()
+    .get("/", () => {
         return { message: "Hello, World!" };
     })
     .post(
@@ -20,7 +17,10 @@ const app = new Drift()
         ({ body }) => {
             console.log(body);
         }
-    );
+    )
+    .get("/user/:userId/posts/:postId", ({ params }) => {
+        console.log(params);
+    });
 
 Bun.serve({
     port: 3000,
