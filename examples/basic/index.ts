@@ -1,9 +1,11 @@
-import { ArkType, Drift } from "src";
-
+import { Drift, ArkType, error } from "src";
 import { type } from "arktype";
 
 const app = new Drift()
     .get("/users/:userId", () => {
+        if (Math.random() > 0.5) {
+            return error("Random", 501);
+        }
         return { message: "Hello, World!" };
     })
     .post(

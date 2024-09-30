@@ -1,5 +1,11 @@
 # drift
 
+## 0.0.11
+
+### Patch Changes
+
+-   fix output type
+
 ## 0.0.10
 
 ### Patch Changes

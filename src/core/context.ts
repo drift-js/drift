@@ -19,7 +19,7 @@ export type ExtractContext<TMiddlewares extends Middleware<any, any>[]> = TMiddl
         : {}
     : {};
 
-type ExtractPathParams<T extends string> = T extends `${string}:${infer Param}/${infer Rest}`
+export type ExtractPathParams<T extends string> = T extends `${string}:${infer Param}/${infer Rest}`
     ? { [K in Param | keyof ExtractPathParams<Rest>]: string }
     : T extends `${string}:${infer Param}`
     ? { [K in Param]: string }
