@@ -1,5 +1,6 @@
-import { Drift, ArkType, error } from "src";
+import { Drift, error } from "src";
 import { type } from "arktype";
+import { body } from "src/validation/arktype";
 
 const app = new Drift()
     .get("/users/:userId", () => {
@@ -10,7 +11,7 @@ const app = new Drift()
     })
     .post(
         "/upload",
-        ArkType.body(
+        body(
             type({
                 message: "string",
                 file: "File",

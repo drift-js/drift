@@ -5,5 +5,3 @@ export * from "./core/context";
 export * from "./core/method-handler";
 export * from "./core/error";
 export * from "./core/route";
-export * from "./middleware";
-export * as ArkType from "./validation/arktype";
