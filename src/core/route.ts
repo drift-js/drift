@@ -21,7 +21,7 @@ export type DriftRoute<
               [key in TMethod]: {
                   input: TInput;
                   query: TQuery;
-                  params: 0 extends 1 & TParams ? ExtractPathParams<TPath> : TParams;
+                  params: 0 extends (1 & TParams) | {} ? ExtractPathParams<TPath> : TParams;
                   output: UnionToIntersection<
                       TData extends {
                           [DRIFT_ERROR]: any;

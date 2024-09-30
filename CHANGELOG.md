@@ -1,5 +1,11 @@
 # drift
 
+## 0.0.13
+
+### Patch Changes
+
+-   add typesafe fetch client
+
 ## 0.0.12
 
 ### Patch Changes

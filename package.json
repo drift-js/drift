@@ -1,6 +1,6 @@
 {
     "name": "@drift-js/drift",
-    "version": "0.0.12",
+    "version": "0.0.13",
     "description": "A simple framework for building web applications",
     "repository": "https://github.com/drift-js/drift",
     "type": "module",
@@ -29,6 +29,11 @@
             "import": "./dist/middleware/index.mjs",
             "require": "./dist/middleware/index.cjs",
             "types": "./dist/middleware/index.d.ts"
+        },
+        "./client": {
+            "import": "./dist/client/index.mjs",
+            "require": "./dist/client/index.cjs",
+            "types": "./dist/client/index.d.ts"
         }
     },
     "files": [
@@ -42,5 +47,8 @@
         "arktype": "2.0.0-rc.13",
         "typescript": "^5.6.2",
         "unbuild": "^2.0.0"
+    },
+    "dependencies": {
+        "type-fest": "^4.26.1"
     }
 }

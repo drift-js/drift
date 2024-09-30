@@ -2,9 +2,9 @@ import { Middleware } from "./middleware";
 
 export type DefaultContext = {
     request: Request;
-    body: any;
-    query: any;
-    params: any;
+    body: {};
+    query: {};
+    params: {};
     errors: {};
 };
 

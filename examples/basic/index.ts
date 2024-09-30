@@ -1,6 +1,7 @@
 import { Drift, error } from "src";
-import { type } from "arktype";
+
 import { body } from "src/validation/arktype";
+import { type } from "arktype";
 
 export const app = new Drift()
     .get("/", () => {
@@ -18,13 +19,20 @@ export const app = new Drift()
             console.log(body);
         }
     )
-    .get("/user/:userId/posts/:postId", ({ params }) => {
-        console.log(params);
+    .get("/users/:userId/posts/:postId", ({ params }) => {
+        if (Math.random() > 0.5) {
+            return error({
+                message: "Failed to retrieve post " + params.postId,
+            });
+        }
+        return {
+            id: "hello",
+        };
     });
 
 Bun.serve({
-    port: 3000,
+    port: 1234,
     fetch: app.fetch,
 });
 
-console.log("Server is running on http://localhost:3000");
+console.log("Server is running on http://localhost:1234");
