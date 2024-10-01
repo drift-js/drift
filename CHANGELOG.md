@@ -1,5 +1,11 @@
 # drift
 
+## 0.0.16
+
+### Patch Changes
+
+-   update to prevent unwrapping class types
+
 ## 0.0.15
 
 ### Patch Changes

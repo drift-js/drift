@@ -1,4 +1,4 @@
-import { DRIFT_ERROR } from "./error";
+import { DRIFT_ERROR, error } from "./error";
 import { DefaultContext } from "./context";
 import { Handler } from "./handler";
 import { MethodHandler, CustomMethodHandler } from "./method-handler";
@@ -65,14 +65,19 @@ export class Drift<TContext = DefaultContext, TRoutes = {}> {
         const url = new URL(request.url);
         const match = this.router.match(url.pathname, request.method);
 
-        if (match.value) {
-            const body = await this.getBody(request);
-            const query = Object.fromEntries(url.searchParams.entries());
-            const response = await match.value({ request, body, query, params: match.parameters });
-            return this.makeResponse(response);
-        }
+        try {
+            if (match.value) {
+                const body = await this.getBody(request);
+                const query = Object.fromEntries(url.searchParams.entries());
+                const response = await match.value({ request, body, query, params: match.parameters });
+                return this.makeResponse(response);
+            }
 
-        return new Response("Not found", { status: 404 });
+            return new Response("Not found", { status: 404 });
+        } catch (e) {
+            console.error(e);
+            return new Response("Internal Server Error", { status: 500 });
+        }
     };
 
     private getBody = async (request: Request) => {
@@ -98,26 +103,25 @@ export class Drift<TContext = DefaultContext, TRoutes = {}> {
         if (DRIFT_ERROR in data) {
             return new Response(JSON.stringify(data.data), {
                 status: data.code,
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-        } else if (typeof data === "string") {
-            return new Response(data, {
-                status: 200,
-                headers: {
-                    "Content-Type": "text/html",
-                },
-            });
-        } else if (typeof data === "object") {
-            return new Response(JSON.stringify(data), {
-                status: 200,
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
             });
         }
-        return new Response(null, { status: 200 });
+
+        if (data instanceof Response) {
+            return data;
+        }
+
+        if (typeof data === "string") {
+            return new Response(data, {
+                status: 200,
+                headers: { "Content-Type": "text/html" },
+            });
+        }
+
+        return new Response(JSON.stringify(data), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+        });
     };
 
     private handle = async (context: any, middlewares: Middleware<any, any>[], handler: Handler<any, any>) => {
