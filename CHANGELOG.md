@@ -1,5 +1,11 @@
 # drift
 
+## 0.0.15
+
+### Patch Changes
+
+-   fix file uploading
+
 ## 0.0.14
 
 ### Patch Changes

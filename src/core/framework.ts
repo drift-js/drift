@@ -94,7 +94,7 @@ export class Drift<TContext = DefaultContext, TRoutes = {}> {
         }
     };
 
-    private makeResponse = (data: any) => {
+    private makeResponse = (data: any = {}) => {
         if (DRIFT_ERROR in data) {
             return new Response(JSON.stringify(data.data), {
                 status: data.code,

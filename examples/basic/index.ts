@@ -17,6 +17,9 @@ export const app = new Drift()
         ),
         ({ body }) => {
             console.log(body);
+            return {
+                message: "File uploaded!",
+            };
         }
     )
     .get("/users/:userId/posts/:postId", ({ params }) => {

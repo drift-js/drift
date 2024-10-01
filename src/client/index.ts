@@ -118,7 +118,7 @@ export const client = <TDrift extends Drift>(base: string): DriftClient<TDrift> 
                       body,
                       headers: {
                           ...(options?.headers || {}),
-                          "Content-Type": containsFile(input) ? "multipart/form-data" : "application/json",
+                          ...(containsFile(input) ? {} : { "Content-Type": "application/json" }),
                           Accept: "application/json",
                       },
                   }
