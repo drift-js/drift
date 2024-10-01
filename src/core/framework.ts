@@ -62,7 +62,6 @@ export class Drift<TContext = DefaultContext, TRoutes = {}> {
     };
 
     public fetch = async (request: Request) => {
-        console.log(request.headers);
         const url = new URL(request.url);
         const match = this.router.match(url.pathname, request.method);
 

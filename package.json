@@ -1,6 +1,6 @@
 {
     "name": "@drift-js/drift",
-    "version": "0.0.13",
+    "version": "0.0.14",
     "description": "A simple framework for building web applications",
     "repository": "https://github.com/drift-js/drift",
     "type": "module",
