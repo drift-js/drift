@@ -1,12 +1,28 @@
 import { Drift, error } from "src";
 
 import { body } from "src/validation/arktype";
+import { derive } from "src/middleware/derive";
 import { type } from "arktype";
 
 export const app = new Drift()
     .get("/", () => {
         return { message: "Hello, World!" };
     })
+    .get(
+        "/user",
+        derive(() => {
+            return {
+                user: {
+                    name: "John Doe",
+                    age: 25,
+                    email: "johndoe@example.com",
+                },
+            };
+        }),
+        ({ user }) => {
+            return user;
+        }
+    )
     .post(
         "/upload",
         body(
@@ -16,7 +32,6 @@ export const app = new Drift()
             })
         ),
         ({ body }) => {
-            console.log(body);
             return {
                 message: "File uploaded!",
             };
@@ -37,5 +52,3 @@ Bun.serve({
     port: 1234,
     fetch: app.fetch,
 });
-
-console.log("Server is running on http://localhost:1234");

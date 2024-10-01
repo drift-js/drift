@@ -11,7 +11,9 @@
         "dev": "unbuild --watch",
         "build": "unbuild",
         "start:example": "bun run examples/basic/index.ts",
-        "dev:example": "bun run --watch examples/basic/index.ts"
+        "dev:example": "bun run --watch examples/basic/index.ts",
+        "start:example:shared-context": "bun run examples/shared-context/index.ts",
+        "dev:example:shared-context": "bun run --watch examples/shared-context/index.ts"
     },
     "exports": {
         "./package.json": "./package.json",
@@ -43,6 +45,7 @@
     "license": "ISC",
     "devDependencies": {
         "@changesets/cli": "^2.27.8",
+        "@tanstack/react-query": "^5.59.0",
         "@types/bun": "^1.1.10",
         "arktype": "2.0.0-rc.13",
         "typescript": "^5.6.2",

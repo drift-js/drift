@@ -1,24 +1,6 @@
 import { containsFile, OmitEmptyObject, Unwrap } from "../core/utils";
-import type { Drift } from "../";
+import type { Drift, DriftRouteData } from "../";
 import type { IntRange } from "type-fest";
-
-export type DriftRouteData = {
-    [key: string]: {
-        [key: string]:
-            | {
-                  output: any;
-              }
-            | {
-                  input: any;
-              }
-            | {
-                  query: any;
-              }
-            | {
-                  params: any;
-              };
-    };
-};
 
 export type DriftClientFetcherOptions<TMethod, TInput = {}, TParams = {}, TQuery = {}> = OmitEmptyObject<{
     method: TMethod;

@@ -10,5 +10,3 @@ const result = await $fetch("/upload", {
         file: new File(["Hello, World!"], "hello.txt"),
     },
 });
-
-console.log(result);

@@ -40,3 +40,21 @@ export type DriftRoute<
           };
       }
     : never;
+
+export type DriftRouteData = {
+    [key: string]: {
+        [key: string]:
+            | {
+                  output: any;
+              }
+            | {
+                  input: any;
+              }
+            | {
+                  query: any;
+              }
+            | {
+                  params: any;
+              };
+    };
+};

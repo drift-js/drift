@@ -11,26 +11,19 @@ export class Drift<TContext = DefaultContext, TRoutes = {}> {
 
     public middleware: Middleware<any>[] = [];
 
-    public use = <const TNewContext = {}, const TNewRoutes = {}>(
-        middleware:
-            | Middleware<TContext, TNewContext>
-            | Drift<TNewContext, TNewRoutes>
-            | Promise<Drift<TNewContext, TNewRoutes>>
-    ) => {
+    public use = <const TNewContext = {}>(middleware: Middleware<TContext, TNewContext> | Drift<TNewContext, any>) => {
         if (middleware instanceof Drift) {
             this.middleware.push(...middleware.middleware);
-            this.router.merge(middleware.router);
-            return this as Drift<TNewContext & Unwrap<Omit<TContext, keyof TNewContext>>, TRoutes & TNewRoutes>;
-        } else if (middleware instanceof Promise) {
-            middleware.then((m) => {
-                this.middleware.push(...m.middleware);
-                this.router.merge(m.router);
-            });
-            return this as Drift<TNewContext & Unwrap<Omit<TContext, keyof TNewContext>>, TRoutes & TNewRoutes>;
+            return this as Drift<Unwrap<TNewContext & Omit<TContext, keyof TNewContext>>, TRoutes>;
         } else {
             this.middleware.push(middleware);
-            return this as Drift<TNewContext & Unwrap<Omit<TContext, keyof TNewContext>>, TRoutes>;
+            return this as Drift<Unwrap<TNewContext & Omit<TContext, keyof TNewContext>>, TRoutes>;
         }
+    };
+
+    public merge = <const TNewRoutes = {}>(middleware: Drift<any, TNewRoutes>) => {
+        this.router.merge(middleware.router);
+        return this as Drift<TContext, TRoutes & TNewRoutes>;
     };
 
     public get: MethodHandler<"GET", TContext, TRoutes> = (path: string, ...handlers: any) => {

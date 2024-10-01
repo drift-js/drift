@@ -1,10 +1,10 @@
-export type Unwrap<T> = T extends Function
-    ? T
-    : T extends { new (...args: any[]): any }
+export type Assign<T> = T;
+export type Unwrap<T> = T extends Request | Function | { new (...args: any[]): any }
     ? T
     : T extends object
     ? { [K in keyof T]: Unwrap<T[K]> }
     : T;
+
 export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never;
 export type OmitEmptyObject<T> = {
     [K in keyof T as {} extends T[K] ? never : K]: T[K];
